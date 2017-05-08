@@ -1,53 +1,54 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, { Component } from 'react'
+import { MapView, AppRegistry, View } from 'react-native'
+import axios from 'axios'
+const { APPTOKEN } = require('./app_token')
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+console.log(APPTOKEN)
 
-export default class NashHistory extends Component {
+class App extends Component {
+
+  state = {
+    region: {
+      latitude: 36.159130,
+      longitude: -86.770105,
+      latitudeDelta: 0.4043,
+      longitudeDelta: 0.4034
+    },
+    annotations: []
+  }
+
+  componentWillMount() {
+    axios.get(`https://data.nashville.gov/resource/m4hn-ihe4.json?$$app_token=${APPTOKEN}`)
+    .then((res) => {
+      for (let item of res.data) {
+        item.subtitle = item.marker_text
+        delete item.marker_text
+        delete item.mapped_location
+      }
+      this.setState({ annotations: res.data })
+      // console.log(res.data)
+    })
+  }
+
+
   render() {
+    const { annotations } = this.state
+    // annotations.forEach(annotation => {
+    //   annotation.rightCalloutView = (
+    //
+    //   )
+    // })
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+      <View style={{ flex: 3 }}>
+        <MapView
+          showsUserLocation
+          style={{ flex: 2 }}
+          region={this.state.region}
+          annotations={annotations}
+        />
       </View>
-    );
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('NashHistory', () => NashHistory);
+AppRegistry.registerComponent('NashHistory', () => App)
