@@ -31,9 +31,17 @@ class App extends Component {
         <TabBarIOS.Item
           title='Map'
           selected
-          selectedIcon={require('./src/images/map.png')}
+          icon={require('./src/images/map.png')}
         >
           <Map handleAddTrip={this.handleAddTrip} />
+        </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title='Trip'
+          selected={false}
+          icon={require('./src/images/trip.png')}
+        >
+          <Trip />
         </TabBarIOS.Item>
       </TabBarIOS>
 
