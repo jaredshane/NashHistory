@@ -28,13 +28,23 @@ class Map extends Component {
     })
   }
 
+  handleAddTrip(annotation) {
+    console.log(annotation)
+    const trip = this.state.trip.slice()
+    trip.push(annotation)
+    this.setState({ trip })
+    console.log(this.state)
+
+  }
+
   render() {
+    console.log('trip', this.state.trip)
     const { annotations } = this.state
     annotations.forEach(annotation => {
       annotation.detailCalloutView = (
-        <View style={{ borderTopWidth: 1, borderColor: '#000000'}}>
+        <View style={{ borderTopWidth: 1, borderColor: '#000000' }}>
           <Text style={styles.subtitle}>{annotation.subtitle}</Text>
-          <Button title="Add to Trip" onPress={() => console.log('pressed')} />
+          <Button title="Add to Trip" onPress={this.handleAddTrip.bind(this, annotation)} />
         </View>
       )
     })
