@@ -11,8 +11,7 @@ class Map extends Component {
       latitudeDelta: 0.4043,
       longitudeDelta: 0.4034
     },
-    annotations: [],
-    trip: []
+    annotations: []
   }
 
   componentWillMount() {
