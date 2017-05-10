@@ -23,7 +23,6 @@ class Map extends Component {
         delete item.mapped_location
       }
       this.setState({ annotations: res.data })
-      // console.log(res.data)
     })
   }
 
