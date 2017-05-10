@@ -1,10 +1,26 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 
 class Trip extends Component {
-  render() {
+
+  renderTrips() {
+  return this.props.tripList.map(trip => {
+    console.log('trip', trip)
     return (
-      <Text>{this.props.tripList}</Text>
+      <View key={trip.number}>
+        <Text>{trip.title} {trip.subtitle}</Text>
+        <Button></Button>
+      </View>
+    )
+  })
+}
+
+  render() {
+    // console.log("this.props", this.props);
+    return (
+      <View>
+        {this.renderTrips()}
+      </View>
     )
   }
 }
