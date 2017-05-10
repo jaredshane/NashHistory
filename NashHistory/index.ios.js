@@ -8,44 +8,47 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      trip: []
+      trip: [],
+      selectedTab: 0
     }
     this.handleAddTrip =  this.handleAddTrip.bind(this)
   }
 
   handleAddTrip(annotation) {
-    console.log(annotation)
     const trip = this.state.trip
     trip.push(annotation)
     this.setState({ trip })
-    console.log(this.state)
     AlertIOS.alert(
       `${annotation.title} successfully added to your trip!`,
       'Select the Trip tab to view your trip'
     )
   }
 
+  handleTabPress(tab) {
+  this.setState({selectedTab: tab})
+}
+
   render() {
     return (
       <TabBarIOS>
         <TabBarIOS.Item
           title='Map'
-          selected
+          selected={this.state.selectedTab === 0}
           icon={require('./src/images/map.png')}
+          onPress={this.handleTabPress.bind(this, 0)}
         >
           <Map handleAddTrip={this.handleAddTrip} />
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
           title='Trip'
-          selected={false}
+          selected={this.state.selectedTab === 1}
           icon={require('./src/images/trip.png')}
+          onPress={this.handleTabPress.bind(this, 1)}
         >
-          <Trip />
+          <Trip tripList={this.state.trip}/>
         </TabBarIOS.Item>
       </TabBarIOS>
-
-
 
       //
       // <View style={{ flex: 1 }}>
