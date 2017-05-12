@@ -50,6 +50,15 @@ class App extends Component {
         >
           <Trip tripList={this.state.trip}/>
         </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title='Account'
+          selected={this.state.selectedTab === 2}
+          icon={require('./src/images/account.png')}
+          onPress={this.handleTabPress.bind(this, 2)}
+        >
+          <Account />
+        </TabBarIOS.Item>
       </TabBarIOS>
 
       //
