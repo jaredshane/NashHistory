@@ -10,7 +10,9 @@ class App extends Component {
     super(props)
     this.state = {
       trip: [],
-      selectedTab: 0
+      selectedTab: 0,
+      email: null,
+      id: null,
     }
     this.handleAddTrip =  this.handleAddTrip.bind(this)
   }
