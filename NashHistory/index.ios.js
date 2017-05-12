@@ -59,15 +59,10 @@ class App extends Component {
           icon={require('./src/images/account.png')}
           onPress={this.handleTabPress.bind(this, 2)}
         >
-          <Account />
+          <Account email={this.state.email} id={this.state.id} />
         </TabBarIOS.Item>
       </TabBarIOS>
 
-      //
-      // <View style={{ flex: 1 }}>
-      //
-      //   <Trip tripList={this.state.trip}/>
-      // </View>
     )
   }
 }
