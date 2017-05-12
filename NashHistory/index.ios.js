@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AppRegistry, View, AlertIOS, TabBarIOS } from 'react-native'
 import Map from './src/components/Map'
 import Trip from './src/components/Trip'
+import Account from './src/components/Account'
 
 class App extends Component {
 
