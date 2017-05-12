@@ -30,6 +30,7 @@ class App extends Component {
 }
 
   render() {
+    console.log('this.state', this.state.trip)
     return (
       <TabBarIOS>
         <TabBarIOS.Item
