@@ -29,8 +29,12 @@ class App extends Component {
   }
 
   handleTabPress(tab) {
-  this.setState({selectedTab: tab})
-}
+    this.setState({ selectedTab: tab })
+  }
+
+  loggedIn(email, password) {
+    console.log('email', email, password)
+  }
 
   render() {
     console.log('this.state', this.state.trip)
