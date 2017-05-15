@@ -32,12 +32,13 @@ class App extends Component {
     this.setState({ selectedTab: tab })
   }
 
-  loggedIn(email, password) {
-    console.log('email', email, password)
+  loggedIn(email, id) {
+    console.log('email', email, id)
+    this.setState({ email, id })
+    console.log(this.state)
   }
 
   render() {
-    console.log('this.state', this.state.trip)
     return (
       <TabBarIOS>
         <TabBarIOS.Item
