@@ -54,7 +54,10 @@ class Account extends Component {
       })
       .then((res) => {
         console.log(res)
-        this.setState({ page: 'journal', password: '', passwordConfirmation: '' })
+        this.setState({ id: res.data.id,  page: 'journal', password: '', passwordConfirmation: '' })
+      })
+      .then(() => {
+        this.props.loggedIn(this.state.email, this.state.id)
       })
     } else {
       this.setState({ error: 'Your passwords did not match, please try again' })
