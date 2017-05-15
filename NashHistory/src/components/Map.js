@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { MapView, Text, View, StyleSheet, Button } from 'react-native'
 import axios from 'axios'
+
 const { APPTOKEN } = require('../../app_token')
 
 class Map extends Component {
