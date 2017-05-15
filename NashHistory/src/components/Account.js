@@ -33,10 +33,12 @@ class Account extends Component {
     })
     .then((res) => {
       console.log(res)
-      this.setState({ id: res.data.id, password: '' })
-      console.log(this.state)
+      return this.setState({ id: res.data.id, password: '' })
     })
-    // this.setState({ page: 'journal' })
+    .then(() => {
+      this.props.loggedIn(this.state.email, this.state.id)
+      this.setState({ page: 'journal' })
+    })
   }
 
   registerButtonPress() {
