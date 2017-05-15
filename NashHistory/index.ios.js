@@ -14,7 +14,8 @@ class App extends Component {
       email: null,
       id: null,
     }
-    this.handleAddTrip =  this.handleAddTrip.bind(this)
+    this.handleAddTrip = this.handleAddTrip.bind(this)
+    this.loggedIn = this.loggedIn.bind(this)
   }
 
   handleAddTrip(annotation) {
