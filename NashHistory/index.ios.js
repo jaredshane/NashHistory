@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { AppRegistry, View, AlertIOS, TabBarIOS } from 'react-native'
+import { AppRegistry, AlertIOS, TabBarIOS } from 'react-native'
 import Map from './src/components/Map'
 import Trip from './src/components/Trip'
+import Account from './src/components/Account'
 
 class App extends Component {
 
@@ -9,9 +10,12 @@ class App extends Component {
     super(props)
     this.state = {
       trip: [],
-      selectedTab: 0
+      selectedTab: 0,
+      email: null,
+      id: null,
     }
-    this.handleAddTrip =  this.handleAddTrip.bind(this)
+    this.handleAddTrip = this.handleAddTrip.bind(this)
+    this.loggedIn = this.loggedIn.bind(this)
   }
 
   handleAddTrip(annotation) {
@@ -25,8 +29,14 @@ class App extends Component {
   }
 
   handleTabPress(tab) {
-  this.setState({selectedTab: tab})
-}
+    this.setState({ selectedTab: tab })
+  }
+
+  loggedIn(email, id) {
+    console.log('email', email, id)
+    this.setState({ email, id })
+    console.log(this.state)
+  }
 
   render() {
     return (
@@ -46,15 +56,21 @@ class App extends Component {
           icon={require('./src/images/trip.png')}
           onPress={this.handleTabPress.bind(this, 1)}
         >
-          <Trip tripList={this.state.trip}/>
+          <Trip tripList={this.state.trip} />
+        </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title='Account'
+          selected={this.state.selectedTab === 2}
+          icon={require('./src/images/account.png')}
+          onPress={this.handleTabPress.bind(this, 2)}
+        >
+          <Account
+            email={this.state.email} id={this.state.id} loggedIn={this.loggedIn}
+          />
         </TabBarIOS.Item>
       </TabBarIOS>
 
-      //
-      // <View style={{ flex: 1 }}>
-      //
-      //   <Trip tripList={this.state.trip}/>
-      // </View>
     )
   }
 }

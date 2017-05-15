@@ -7,7 +7,8 @@ class Trip extends Component {
     super(props)
     this.state = {
       longitude: '',
-      latitude: ''
+      latitude: '',
+      trip: []
     }
   }
 
