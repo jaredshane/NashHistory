@@ -16,6 +16,7 @@ class Account extends Component {
     this.loginButtonPress = this.loginButtonPress.bind(this)
     this.registerButtonPress = this.registerButtonPress.bind(this)
     this.registerUser = this.registerUser.bind(this)
+    this.logoutButtonPress = this.logoutButtonPress.bind(this)
   }
 
   componentWillMount() {
@@ -53,15 +54,20 @@ class Account extends Component {
         password: this.state.password
       })
       .then((res) => {
-        console.log(res)
-        this.setState({ id: res.data.id,  page: 'journal', password: '', passwordConfirmation: '' })
+        console.log(res.data.user[0].id)
+        this.setState({ id: res.data.user[0].id, page: 'journal', password: '', passwordConfirmation: '' })
       })
       .then(() => {
+        console.log('register', this.state.id)
         this.props.loggedIn(this.state.email, this.state.id)
       })
     } else {
       this.setState({ error: 'Your passwords did not match, please try again' })
     }
+  }
+
+  logoutButtonPress() {
+    this.setState({ page: 'login' })
   }
 
   render() {
@@ -107,6 +113,11 @@ class Account extends Component {
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </Text>
+          <TouchableOpacity
+            onPress={this.logoutButtonPress}
+          >
+              <Text>Logout</Text>
+            </TouchableOpacity>
         </View>
       )
     }
