@@ -49,7 +49,7 @@ class Account extends Component {
   registerUser() {
     if (this.state.password === this.state.passwordConfirmation) {
       console.log('registering')
-      axios.post('http://localhost:3000/v1/register', {
+      axios.post('https://lit-eyrie-84713.herokuapp.com/v1/register', {
         email: this.state.email,
         password: this.state.password
       })
