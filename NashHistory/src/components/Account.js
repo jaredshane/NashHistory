@@ -54,10 +54,11 @@ class Account extends Component {
         password: this.state.password
       })
       .then((res) => {
-        console.log(res)
-        this.setState({ id: res.data.id,  page: 'journal', password: '', passwordConfirmation: '' })
+        console.log(res.data.user[0].id)
+        this.setState({ id: res.data.user[0].id, page: 'journal', password: '', passwordConfirmation: '' })
       })
       .then(() => {
+        console.log('register', this.state.id)
         this.props.loggedIn(this.state.email, this.state.id)
       })
     } else {
