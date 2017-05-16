@@ -28,7 +28,7 @@ class Account extends Component {
   }
 
   loginButtonPress() {
-    axios.post('http://localhost:3000/v1/login', {
+    axios.post('https://lit-eyrie-84713.herokuapp.com/v1/login', {
       email: this.state.email,
       password: this.state.password
     })
