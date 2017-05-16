@@ -33,7 +33,7 @@ class Account extends Component {
       password: this.state.password
     })
     .then((res) => {
-      console.log(res)
+      // console.log(res)
       return this.setState({ id: res.data.id, password: '' })
     })
     .then(() => {
@@ -48,17 +48,17 @@ class Account extends Component {
 
   registerUser() {
     if (this.state.password === this.state.passwordConfirmation) {
-      console.log('registering')
-      axios.post('https://lit-eyrie-84713.herokuapp.com/v1/register', {
+      // console.log('registering')
+      axios.post('https://lit-eyrie-84713.herokuapp.comx/v1/register', {
         email: this.state.email,
         password: this.state.password
       })
       .then((res) => {
-        console.log(res.data.user[0].id)
+        // console.log(res.data.user[0].id)
         this.setState({ id: res.data.user[0].id, page: 'journal', password: '', passwordConfirmation: '' })
       })
       .then(() => {
-        console.log('register', this.state.id)
+        // console.log('register', this.state.id)
         this.props.loggedIn(this.state.email, this.state.id)
       })
     } else {
