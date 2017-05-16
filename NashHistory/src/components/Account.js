@@ -16,6 +16,7 @@ class Account extends Component {
     this.loginButtonPress = this.loginButtonPress.bind(this)
     this.registerButtonPress = this.registerButtonPress.bind(this)
     this.registerUser = this.registerUser.bind(this)
+    this.logoutButtonPress = this.logoutButtonPress.bind(this)
   }
 
   componentWillMount() {
