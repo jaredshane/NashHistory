@@ -52,7 +52,7 @@ navigatePlace(la, lo) {
 }
 
 saveTrips() {
-  console.log(this.state.trip)
+  // console.log(this.state.trip)
   Promise.all(this.state.trip.map(trip => {
     console.log(trip)
     const data = {
