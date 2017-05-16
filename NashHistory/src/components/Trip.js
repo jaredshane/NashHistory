@@ -30,7 +30,7 @@ componentWillMount() {
 
   if (this.props.email) {
     const id = this.props.id
-    axios.get(`http://localhost:3000/v1/trip/${id}`)
+    axios.get(`https://lit-eyrie-84713.herokuapp.com/v1/trip/${id}`)
     .then((res) => {
       // console.log('trip res', res.data)
       res.data.map((trip) => {
@@ -63,7 +63,7 @@ saveTrips() {
       number: trip.number,
       location: trip.location,
       user_id: this.props.id }
-    return axios.post('http://localhost:3000/v1/trip', data)
+    return axios.post('https://lit-eyrie-84713.herokuapp.com/v1/trip', data)
     .then((res) => {
       console.log(res)
     })
