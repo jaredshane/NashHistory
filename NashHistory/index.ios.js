@@ -56,7 +56,7 @@ class App extends Component {
           icon={require('./src/images/trip.png')}
           onPress={this.handleTabPress.bind(this, 1)}
         >
-          <Trip tripList={this.state.trip} />
+          <Trip tripList={this.state.trip} email={this.state.email} id={this.state.id} />
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
