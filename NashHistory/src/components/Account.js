@@ -66,6 +66,10 @@ class Account extends Component {
     }
   }
 
+  logoutButtonPress() {
+    this.setState({ page: 'login' })
+  }
+
   render() {
     if (this.state.page === 'login') {
       return (
