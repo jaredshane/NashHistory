@@ -88,6 +88,7 @@ renderTrips() {
     return (
       <View>
         {this.renderTrips()}
+        {this.showSave()}
       </View>
     )
   }
