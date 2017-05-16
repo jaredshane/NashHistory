@@ -30,7 +30,7 @@ componentWillMount() {
 
   if (this.props.email) {
     const id = this.props.id
-    axios.get(`http://localhost:3000/v1/trip/${id}`)
+    axios.get(`https://lit-eyrie-84713.herokuapp.com/v1/trip/${id}`)
     .then((res) => {
       // console.log('trip res', res.data)
       res.data.map((trip) => {
