@@ -33,9 +33,9 @@ class App extends Component {
   }
 
   loggedIn(email, id) {
-    console.log('email', email, id)
+    // console.log('email', email, id)
     this.setState({ email, id })
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   render() {
