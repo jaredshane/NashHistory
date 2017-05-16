@@ -11,6 +11,7 @@ class Trip extends Component {
       latitude: '',
       trip: []
     }
+    this.saveTrips = this.saveTrips.bind(this)
   }
 
 componentWillMount() {
