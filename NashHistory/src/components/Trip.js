@@ -23,6 +23,9 @@ componentWillMount() {
        })
     }
   )
+  const newArr = this.state.trip
+  newArr.push(this.props.tripList)
+  this.setState({ trip: newArr[0] })
 }
 
 navigatePlace(la, lo) {
