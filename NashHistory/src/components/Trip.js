@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, Button, TouchableHighlight, Linking } from 'react-native'
+import { View, Text, TouchableHighlight, Linking } from 'react-native'
+import axios from 'axios'
 
 class Trip extends Component {
 
