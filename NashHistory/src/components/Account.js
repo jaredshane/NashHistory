@@ -47,6 +47,11 @@ class Account extends Component {
     }
   }
 
+  // componentWillUpdate() {
+  //   console.log('this happens everytime component updates')
+  //   this.showImages()
+  // }
+
   loginButtonPress() {
     axios.post('https://lit-eyrie-84713.herokuapp.com/v1/login', {
       email: this.state.email,
