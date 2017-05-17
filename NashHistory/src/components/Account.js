@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
-import { View, TextInput, Text, TouchableOpacity, Modal, CameraRoll } from 'react-native'
+import {
+  View,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  Modal,
+  CameraRoll,
+  ScrollView,
+  Image
+} from 'react-native'
 import axios from 'axios'
+import { RNS3 } from 'react-native-aws3'
+const { options } =  require('../../awsoptions')
 
 class Account extends Component {
   constructor(props) {
