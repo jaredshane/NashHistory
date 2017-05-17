@@ -209,21 +209,58 @@ class Account extends Component {
               keyboardAppearance='dark'
               style={styles.textInput}
             />
+
             <TouchableOpacity
               onPress={this.pickImage}
             >
               <Text>Pick Image</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
-              onPress={this.closeModal}
+              onPress={this.toggleEntryModal}
             >
               <Text>
                 Close
               </Text>
             </TouchableOpacity>
           </Modal>
+
+          <Modal
+            animationType='fade'
+            visible={this.state.photoModal}
+          >
+            <View>
+              <Text>Photosssss</Text>
+              {
+                this.state.photos.map((photo, index) => {
+                  // console.log(photo, index)
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        this.setImageToState(photo)
+                      }}
+                    >
+                      <Image
+                        style={{
+                          width: 100,
+                          height: 100
+                        }}
+                        source={{ uri: photo.node.image.uri }}
+                      />
+                    </TouchableOpacity>
+
+                  )
+                })
+              }
+
+            </View>
+          </Modal>
+
+      {/***** Will display journal entries and buttons to create new entry and logout ******/}
+
           <TouchableOpacity
-            onPress={this.openModal}
+            onPress={this.toggleEntryModal}
           >
             <Text>
               Create New Entry
