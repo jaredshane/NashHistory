@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, Text, TouchableOpacity } from 'react-native'
+import { View, TextInput, Text, TouchableOpacity, Modal, CameraRoll } from 'react-native'
 import axios from 'axios'
 
 class Account extends Component {
@@ -11,12 +11,16 @@ class Account extends Component {
       page: '',
       passwordConfirmation: '',
       error: '',
-      id: ''
+      id: '',
+      modalVisible: false
     }
     this.loginButtonPress = this.loginButtonPress.bind(this)
     this.registerButtonPress = this.registerButtonPress.bind(this)
     this.registerUser = this.registerUser.bind(this)
     this.logoutButtonPress = this.logoutButtonPress.bind(this)
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.pickImage = this.pickImage.bind(this)
   }
 
   componentWillMount() {
@@ -28,7 +32,7 @@ class Account extends Component {
   }
 
   loginButtonPress() {
-    axios.post('http://localhost:3000/v1/login', {
+    axios.post('https://lit-eyrie-84713.herokuapp.com/v1/login', {
       email: this.state.email,
       password: this.state.password
     })
@@ -49,13 +53,18 @@ class Account extends Component {
   registerUser() {
     if (this.state.password === this.state.passwordConfirmation) {
       console.log('registering')
-      axios.post('http://localhost:3000/v1/register', {
+      axios.post('https://lit-eyrie-84713.herokuapp.com/v1/register', {
         email: this.state.email,
         password: this.state.password
       })
       .then((res) => {
         console.log(res.data.user[0].id)
-        this.setState({ id: res.data.user[0].id, page: 'journal', password: '', passwordConfirmation: '' })
+        this.setState({
+          id: res.data.user[0].id,
+          page: 'journal',
+          password: '',
+          passwordConfirmation: ''
+        })
       })
       .then(() => {
         console.log('register', this.state.id)
@@ -68,6 +77,25 @@ class Account extends Component {
 
   logoutButtonPress() {
     this.setState({ page: 'login' })
+  }
+
+  openModal() {
+    this.setState({ modalVisible: true })
+  }
+
+  closeModal() {
+    this.setState({ modalVisible: false })
+  }
+
+  pickImage() {
+    CameraRoll.getPhotos({
+      first: 20,
+      assetType: 'All'
+    })
+    .then((photo) => {
+      console.log('photo', photo)
+    })
+
   }
 
   render() {
@@ -110,9 +138,39 @@ class Account extends Component {
     if (this.state.page === 'journal') {
       return (
         <View>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </Text>
+          <Modal
+            animationType='fade'
+            // transparent
+            visible={this.state.modalVisible}
+          >
+            <TextInput
+              maxLength={1000}
+              multiline
+              placeholder='Write about your trip'
+              keyboardAppearance='dark'
+              style={styles.textInput}
+            />
+            <TouchableOpacity
+              onPress={this.pickImage}
+            >
+              <Text>Pick Image</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.closeModal}
+            >
+              <Text>
+                Close
+              </Text>
+            </TouchableOpacity>
+          </Modal>
+          <TouchableOpacity
+            onPress={this.openModal}
+          >
+            <Text>
+              Create New Entry
+            </Text>
+
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={this.logoutButtonPress}
           >
