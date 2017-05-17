@@ -100,12 +100,12 @@ class Account extends Component {
     this.setState({ page: 'login' })
   }
 
-  openModal() {
-    this.setState({ modalVisible: true })
+  toggleEntryModal() {
+    this.setState({ modalVisible: !this.state.modalVisible })
   }
 
-  closeModal() {
-    this.setState({ modalVisible: false })
+  togglePhotoModal() {
+    this.setState({ photoModal: !this.state.photoModal })
   }
 
   pickImage() {
