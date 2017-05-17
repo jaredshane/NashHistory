@@ -113,13 +113,51 @@ class Account extends Component {
       first: 20,
       assetType: 'All'
     })
-    .then((photo) => {
-      console.log('photo', photo)
+    .then((cameraRoll) => {
+      this.setState({ photos: cameraRoll.edges, photoModal: true, modalVisible: false })
+      // console.log(cameraRoll.edges)
     })
-
   }
 
+  setImageToState(photo) {
+    console.log('photo', photo)
+    const file = {
+      // `uri` can also be a file system path (i.e. file://)
+      uri: photo.node.image.uri,
+      name: photo.node.image.filename,
+      type: 'image/jpg'
+    }
+
+    RNS3.put(file, options).then(response => {
+      // console.log(response)
+      if (response.status !== 201) console.log('Failed to upload image to S3')
+      console.log('aws', response.body)
+    })
+  }
+
+  // showImages() {
+  //   if (this.state.showPhotos) {
+  //     this.state.photos.map((photo, index) => {
+  //       // console.log(photo, index)
+  //       return (
+  //         <TouchableOpacity
+  //           key={index}
+  //         >
+  //           <Image
+  //             style={{
+  //               width: 100,
+  //               height: 100
+  //             }}
+  //             source={{ uri: photo.node.image.uri }}
+  //           />
+  //         </TouchableOpacity>
+  //       )
+  //     })
+  //   }
+  // }
+
   render() {
+    // console.log(this.state)
     if (this.state.page === 'login') {
       return (
         <View style={styles.inputContainer}>
