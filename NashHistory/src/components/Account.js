@@ -270,8 +270,8 @@ class Account extends Component {
           <TouchableOpacity
             onPress={this.logoutButtonPress}
           >
-              <Text>Logout</Text>
-            </TouchableOpacity>
+            <Text>Logout</Text>
+          </TouchableOpacity>
         </View>
       )
     }
