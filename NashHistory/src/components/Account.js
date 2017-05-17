@@ -23,15 +23,20 @@ class Account extends Component {
       passwordConfirmation: '',
       error: '',
       id: '',
-      modalVisible: false
+      modalVisible: false,
+      photoModal: false,
+      photos: [],
+      selectedImage: ''
     }
     this.loginButtonPress = this.loginButtonPress.bind(this)
     this.registerButtonPress = this.registerButtonPress.bind(this)
     this.registerUser = this.registerUser.bind(this)
     this.logoutButtonPress = this.logoutButtonPress.bind(this)
-    this.openModal = this.openModal.bind(this)
-    this.closeModal = this.closeModal.bind(this)
+    this.toggleEntryModal = this.toggleEntryModal.bind(this)
+    this.togglePhotoModal = this.togglePhotoModal.bind(this)
     this.pickImage = this.pickImage.bind(this)
+    // this.showImages = this.showImages.bind(this)
+    this.setImageToState = this.setImageToState.bind(this)
   }
 
   componentWillMount() {
