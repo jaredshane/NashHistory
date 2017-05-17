@@ -189,7 +189,6 @@ class Account extends Component {
           >
             <Text >Register</Text>
           </TouchableOpacity>
-
         </View>
       )
     }
@@ -197,6 +196,7 @@ class Account extends Component {
     if (this.state.page === 'journal') {
       return (
         <View>
+          {/********** modal for creating a new entry *********/}
           <Modal
             animationType='fade'
             // transparent
