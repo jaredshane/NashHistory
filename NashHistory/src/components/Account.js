@@ -212,7 +212,8 @@ class Account extends Component {
               multiline
               placeholder='Write about your trip'
               keyboardAppearance='dark'
-              style={styles.textInput}
+              style={styles.entryInput}
+              onChangeText={entry => this.setState({ entry })}
             />
 
             <TouchableOpacity
