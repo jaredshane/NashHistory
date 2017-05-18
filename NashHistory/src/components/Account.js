@@ -50,10 +50,10 @@ class Account extends Component {
     }
   }
 
-  // componentWillUpdate() {
-  //   console.log('this happens everytime component updates')
-  //   this.showImages()
-  // }
+  componentDidUpdate() {
+    console.log(this.state)
+    // this.showSelectedImage()
+  }
 
   loginButtonPress() {
     axios.post('https://lit-eyrie-84713.herokuapp.com/v1/login', {
