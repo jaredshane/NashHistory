@@ -222,6 +222,20 @@ class Account extends Component {
               <Text>Pick Image</Text>
             </TouchableOpacity>
 
+            <Image
+              style={{
+                width: 150,
+                height: 150
+              }}
+              source={{ uri: this.state.selectedImage }}
+            />
+
+            <TouchableOpacity
+              onPress={this.posttoAWS}
+            >
+              <Text> Save Entry </Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
               onPress={this.toggleEntryModal}
             >
