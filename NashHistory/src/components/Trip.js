@@ -28,16 +28,12 @@ componentWillMount() {
   const newArr = this.state.trip
   newArr.push(this.props.tripList)
   this.setState({ trip: newArr[0] })
-  // console.log('trip state', this.state.trip)
 
   if (this.props.email) {
     const id = this.props.id
     axios.get(`https://lit-eyrie-84713.herokuapp.com/v1/trip/${id}`)
     .then((res) => {
-      // console.log('trip res', res.data)
       res.data.map((trip) => {
-        // console.log('trip', trip)
-        // console.log(this.state.trip)
         const tripArr = this.state.trip
         tripArr.push(trip)
         return this.setState({ trip: tripArr })
@@ -54,9 +50,7 @@ navigatePlace(la, lo) {
 }
 
 saveTrips() {
-  // console.log(this.state.trip)
   Promise.all(this.state.trip.map(trip => {
-    // console.log(trip)
     const data = {
       latitude: trip.latitude,
       longitude: trip.longitude,
@@ -67,7 +61,6 @@ saveTrips() {
       user_id: this.props.id }
     return axios.post('https://lit-eyrie-84713.herokuapp.com/v1/trip', data)
     .then((res) => {
-      // console.log(res)
     })
   }))
 }
@@ -89,7 +82,6 @@ showSave() {
 
 renderTrips() {
   return this.props.tripList.map(trip => {
-    // console.log('trip', trip)
     return (
       <CardSection key={trip.number}>
         <Card>

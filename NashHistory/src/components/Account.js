@@ -54,12 +54,10 @@ class Account extends Component {
   }
 
   setImageToState(photo) {
-    console.log(this.state, photo)
     this.setState({
       selectedImage: photo.node.image.uri,
       selectedImageName: photo.node.image.filename
     })
-    // console.log('this.state.selectedImage', this.state.selectedImage)
   }
 
   logoutButtonPress() {
@@ -81,19 +79,16 @@ class Account extends Component {
     })
     .then((cameraRoll) => {
       this.setState({ photos: cameraRoll.edges, photoModal: true, modalVisible: false })
-      // console.log(cameraRoll.edges)
     })
   }
 
   registerUser() {
     if (this.state.password === this.state.passwordConfirmation) {
-      console.log('registering')
       axios.post('https://lit-eyrie-84713.herokuapp.com/v1/register', {
         email: this.state.email,
         password: this.state.password
       })
       .then((res) => {
-        // console.log(res.data.user[0].id)
         this.setState({
           id: res.data.user[0].id,
           page: 'journal',
@@ -102,7 +97,6 @@ class Account extends Component {
         })
       })
       .then(() => {
-        // console.log('register', this.state.id)
         this.props.loggedIn(this.state.email, this.state.id)
       })
     } else {
@@ -120,7 +114,6 @@ class Account extends Component {
       password: this.state.password
     })
     .then((res) => {
-      // console.log(res)
       return this.setState({ id: res.data.id, password: '' })
     })
     .then(() => {
@@ -129,29 +122,21 @@ class Account extends Component {
       const id = this.state.id
       axios.get(`https://lit-eyrie-84713.herokuapp.com/v1/journal/${id}`)
       .then((res) => {
-        // console.log(res)
         this.setState({ userEntries: res.data })
-        console.log(res)
-        console.log(this.state)
       })
     })
   }
 
   posttoAWS() {
-    // console.log('this')
     const file = {
-      // `uri` can also be a file system path (i.e. file://)
       uri: this.state.selectedImage,
       name: this.state.selectedImageName,
       type: 'image/jpg'
     }
 
-    console.log('file', file)
 
     RNS3.put(file, options).then(response => {
-      // console.log(response)
       if (response.status !== 201) console.log('Failed to upload image to S3')
-      // console.log('aws', response.body.postResponse.location)
       return response.body.postResponse.location
     })
     .then((res) => {
@@ -161,20 +146,16 @@ class Account extends Component {
         user_id: this.state.id
       }
       const entryArr = this.state.userEntries
-      console.log('data', data, entryArr)
       entryArr.push(data)
       this.setState({ userEntries: entryArr })
       axios.post('https://lit-eyrie-84713.herokuapp.com/v1/journal', data)
       .then((response) => {
-        // console.log('response', response)
         this.setState({ modalVisible: false })
       })
     })
   }
 
   renderEntries() {
-    console.log(this.state.userEntries)
-    console.log('this was called')
     return this.state.userEntries.map(entry => {
       return (
         <CardSection key={entry.id}>
@@ -188,7 +169,6 @@ class Account extends Component {
   }
 
   render() {
-    // console.log(this.state)
     if (this.state.page === 'login') {
       return (
         <View style={styles.inputContainer}>
@@ -290,7 +270,6 @@ class Account extends Component {
             <ScrollView>
               <View style={styles.photoContainer}>
               {this.state.photos.map((photo, index) => {
-                  // console.log(photo, index)
                   return (
 
 
