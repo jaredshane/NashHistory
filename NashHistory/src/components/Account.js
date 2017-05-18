@@ -356,6 +356,13 @@ const styles = {
     // flexDirection: 'row',
     borderColor: '#ddd',
     position: 'relative'
+  },
+  entryInput: {
+    height: 100,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 5,
+    marginTop: 30
   }
 }
 
