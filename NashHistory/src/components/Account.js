@@ -53,28 +53,40 @@ class Account extends Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.state)
-    // this.showSelectedImage()
+  // componentDidUpdate() {
+  //   this.renderEntries()
+  // }
+
+  setImageToState(photo) {
+    console.log(this.state, photo)
+    this.setState({
+      selectedImage: photo.node.image.uri,
+      selectedImageName: photo.node.image.filename
+    })
+    // console.log('this.state.selectedImage', this.state.selectedImage)
   }
 
-  loginButtonPress() {
-    axios.post('https://lit-eyrie-84713.herokuapp.com/v1/login', {
-      email: this.state.email,
-      password: this.state.password
-    })
-    .then((res) => {
-      console.log(res)
-      return this.setState({ id: res.data.id, password: '' })
-    })
-    .then(() => {
-      this.props.loggedIn(this.state.email, this.state.id)
-      this.setState({ page: 'journal' })
-    })
+  logoutButtonPress() {
+    this.setState({ page: 'login' })
   }
 
-  registerButtonPress() {
-    this.setState({ page: 'register' })
+  toggleEntryModal() {
+    this.setState({ modalVisible: !this.state.modalVisible })
+  }
+
+  togglePhotoModal() {
+    this.setState({ photoModal: !this.state.photoModal, modalVisible: !this.state.modalVisible })
+  }
+
+  pickImage() {
+    CameraRoll.getPhotos({
+      first: 20,
+      assetType: 'All'
+    })
+    .then((cameraRoll) => {
+      this.setState({ photos: cameraRoll.edges, photoModal: true, modalVisible: false })
+      // console.log(cameraRoll.edges)
+    })
   }
 
   registerUser() {
