@@ -216,13 +216,15 @@ class Account extends Component {
           />
           <TouchableOpacity
             onPress={this.loginButtonPress}
+            style={styles.loginButtonStyle}
           >
-            <Text >Log In</Text>
+            <Text style={styles.textStyle} >Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            style={styles.buttonStyle}
             onPress={this.registerButtonPress}
           >
-            <Text >Register</Text>
+            <Text style={styles.textStyle} >Register</Text>
           </TouchableOpacity>
         </View>
       )
@@ -237,6 +239,9 @@ class Account extends Component {
             // transparent
             visible={this.state.modalVisible}
           >
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerText}>Journal Entry</Text>
+            </View>
             <TextInput
               maxLength={1000}
               multiline
@@ -245,64 +250,75 @@ class Account extends Component {
               style={styles.entryInput}
               onChangeText={entry => this.setState({ entry })}
             />
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={this.pickImage}
+                style={styles.buttonStyle}
+              >
+                  <Text style={styles.textStyle}>Pick Image</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={this.pickImage}
-            >
-              <Text>Pick Image</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.posttoAWS}
+                style={styles.buttonStyle}
+              >
+                <Text style={styles.textStyle}>Save Entry</Text>
+              </TouchableOpacity>
 
+              <TouchableOpacity
+                onPress={this.toggleEntryModal}
+                style={styles.buttonStyle}
+              >
+                <Text style={styles.textStyle}>
+                  Close
+                </Text>
+              </TouchableOpacity>
+
+            </View>
             <Image
               style={{
-                width: 150,
-                height: 150
+                width: 300,
+                height: 300,
+                alignSelf: 'center'
               }}
               source={{ uri: this.state.selectedImage }}
             />
 
-            <TouchableOpacity
-              onPress={this.posttoAWS}
-            >
-              <Text> Save Entry </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={this.toggleEntryModal}
-            >
-              <Text>
-                Close
-              </Text>
-            </TouchableOpacity>
           </Modal>
 
           <Modal
             animationType='fade'
             visible={this.state.photoModal}
           >
+
             <ScrollView>
-              <Text>Photosssss</Text>
+              <View style={styles.photoContainer}>
               {this.state.photos.map((photo, index) => {
                   // console.log(photo, index)
                   return (
+
+
                     <TouchableOpacity
                       key={index}
                       onPress={() => { this.setImageToState(photo) }}
                     >
                       <Image
                         style={{
-                          width: 150,
-                          height: 150
+                          width: 123,
+                          height: 123,
                         }}
                         source={{ uri: photo.node.image.uri }}
                       />
                     </TouchableOpacity>
                   )
                 })}
+              </View>
                 <TouchableOpacity
                   onPress={this.togglePhotoModal}
+                  style={styles.buttonStyle}
                 >
-                  <Text>
-                    Close
+                  <Text style={styles.textStyle}>
+                    Select Photo
                   </Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -310,17 +326,25 @@ class Account extends Component {
 
       {/***** Will display journal entries and buttons to create new entry and logout ******/}
           <TouchableOpacity
+            style={styles.entryButtonStyle}
             onPress={this.toggleEntryModal}
           >
-            <Text>
+            <Text
+              style={styles.textStyle}
+            >
               Create New Entry
             </Text>
 
           </TouchableOpacity>
           <TouchableOpacity
+            style={styles.logoutButtonStyle}
             onPress={this.logoutButtonPress}
           >
-            <Text>Logout</Text>
+            <Text
+              style={styles.logoutStyle}
+            >
+              Logout
+          </Text>
           </TouchableOpacity>
           {this.renderEntries()}
         </ScrollView>
@@ -358,8 +382,9 @@ class Account extends Component {
           />
           <TouchableOpacity
             onPress={this.registerUser}
+            style={styles.buttonStyle}
           >
-              <Text>Register Account</Text>
+              <Text style={styles.textStyle}>Register Account</Text>
             </TouchableOpacity>
             <Text>
               {this.state.error}
@@ -388,11 +413,66 @@ const styles = {
     position: 'relative'
   },
   entryInput: {
-    height: 100,
+    height: 80,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 5,
-    marginTop: 30
+    marginTop: 30,
+    marginLeft: 5,
+    marginRight: 5,
+    padding: 2
+  },
+  buttonStyle: {
+    // borderColor: '007aff',
+    // borderWidth: 2,
+    alignSelf: 'stretch',
+    backgroundColor: '#007aff',
+    padding: 10,
+    margin: 2
+  },
+  textStyle: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  logoutStyle: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  logoutButtonStyle: {
+    alignSelf: 'stretch',
+    backgroundColor: '#ff0000',
+    marginTop: 2,
+    padding: 10
+  },
+  entryButtonStyle: {
+    alignSelf: 'stretch',
+    backgroundColor: '#00ad02',
+    padding: 10
+  },
+  loginButtonStyle: {
+    alignSelf: 'stretch',
+    backgroundColor: '#00ad02',
+    padding: 10,
+    margin: 2
+  },
+  photoContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    borderWidth: 3,
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  headerText: {
+    alignSelf: 'center',
+    fontSize: 20
+  },
+  headerContainer: {
+    backgroundColor: '#f7f4e8',
+    padding: 10
   }
 }
 
