@@ -53,10 +53,6 @@ class Account extends Component {
     }
   }
 
-  // componentDidUpdate() {
-  //   this.renderEntries()
-  // }
-
   setImageToState(photo) {
     console.log(this.state, photo)
     this.setState({
