@@ -226,7 +226,7 @@ class Account extends Component {
 
     if (this.state.page === 'journal') {
       return (
-        <View>
+        <ScrollView style={{ marginBottom: 50 }}>
           {/********** modal for creating a new entry *********/}
           <Modal
             animationType='fade'
@@ -305,7 +305,6 @@ class Account extends Component {
           </Modal>
 
       {/***** Will display journal entries and buttons to create new entry and logout ******/}
-
           <TouchableOpacity
             onPress={this.toggleEntryModal}
           >
@@ -319,7 +318,8 @@ class Account extends Component {
           >
             <Text>Logout</Text>
           </TouchableOpacity>
-        </View>
+          {this.renderEntries()}
+        </ScrollView>
       )
     }
 
