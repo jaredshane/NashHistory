@@ -25,7 +25,7 @@ class Account extends Component {
       page: '',
       passwordConfirmation: '',
       error: '',
-      id: null,
+      id: '',
       modalVisible: false,
       photoModal: false,
       photos: [],
