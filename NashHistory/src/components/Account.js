@@ -38,8 +38,8 @@ class Account extends Component {
     this.toggleEntryModal = this.toggleEntryModal.bind(this)
     this.togglePhotoModal = this.togglePhotoModal.bind(this)
     this.pickImage = this.pickImage.bind(this)
-    // this.showImages = this.showImages.bind(this)
     this.setImageToState = this.setImageToState.bind(this)
+    this.posttoAWS = this.posttoAWS.bind(this)
   }
 
   componentWillMount() {
