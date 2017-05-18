@@ -27,7 +27,9 @@ class Account extends Component {
       modalVisible: false,
       photoModal: false,
       photos: [],
-      selectedImage: ''
+      selectedImage: '',
+      selectedImageName: '',
+      entry: ''
     }
     this.loginButtonPress = this.loginButtonPress.bind(this)
     this.registerButtonPress = this.registerButtonPress.bind(this)
