@@ -114,40 +114,35 @@ class Account extends Component {
     }
   }
 
-  logoutButtonPress() {
-    this.setState({ page: 'login' })
+  registerButtonPress() {
+    this.setState({ page: 'register' })
   }
 
-  toggleEntryModal() {
-    this.setState({ modalVisible: !this.state.modalVisible })
-  }
-
-  togglePhotoModal() {
-    this.setState({ photoModal: !this.state.photoModal, modalVisible: !this.state.modalVisible })
-  }
-
-  pickImage() {
-    CameraRoll.getPhotos({
-      first: 20,
-      assetType: 'All'
+  loginButtonPress() {
+    axios.post('https://lit-eyrie-84713.herokuapp.com/v1/login', {
+      email: this.state.email,
+      password: this.state.password
     })
-    .then((cameraRoll) => {
-      this.setState({ photos: cameraRoll.edges, photoModal: true, modalVisible: false })
-      // console.log(cameraRoll.edges)
+    .then((res) => {
+      // console.log(res)
+      return this.setState({ id: res.data.id, password: '' })
     })
-  }
-
-  setImageToState(photo) {
-    console.log(this.state, photo)
-    this.setState({
-      selectedImage: photo.node.image.uri,
-      selectedImageName: photo.node.image.filename
+    .then(() => {
+      this.props.loggedIn(this.state.email, this.state.id)
+      this.setState({ page: 'journal' })
+      const id = this.state.id
+      axios.get(`https://lit-eyrie-84713.herokuapp.com/v1/journal/${id}`)
+      .then((res) => {
+        // console.log(res)
+        this.setState({ userEntries: res.data })
+        console.log(res)
+        console.log(this.state)
+      })
     })
-    console.log('this.state.selectedImage', this.state.selectedImage)
   }
 
   posttoAWS() {
-    console.log('this')
+    // console.log('this')
     const file = {
       // `uri` can also be a file system path (i.e. file://)
       uri: this.state.selectedImage,
