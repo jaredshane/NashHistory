@@ -123,41 +123,43 @@ class Account extends Component {
   }
 
   setImageToState(photo) {
-    console.log('photo', photo)
+    console.log(this.state, photo)
+    this.setState({
+      selectedImage: photo.node.image.uri,
+      selectedImageName: photo.node.image.filename
+    })
+    console.log('this.state.selectedImage', this.state.selectedImage)
+  }
+
+  posttoAWS() {
+    console.log('this')
     const file = {
       // `uri` can also be a file system path (i.e. file://)
-      uri: photo.node.image.uri,
-      name: photo.node.image.filename,
+      uri: this.state.selectedImage,
+      name: this.state.selectedImageName,
       type: 'image/jpg'
     }
+
+    console.log('file', file)
 
     RNS3.put(file, options).then(response => {
       // console.log(response)
       if (response.status !== 201) console.log('Failed to upload image to S3')
       console.log('aws', response.body)
+      return response.body.location
+    })
+    .then((res) => {
+      const data = {
+        entry: this.state.entry,
+        photo_url: res,
+        user_id: this.state.id
+      }
+        axios.post('https://lit-eyrie-84713.herokuapp.com/v1/journal', data)
+        .then((response) => {
+          console.log('response', response)
+        })
     })
   }
-
-  // showImages() {
-  //   if (this.state.showPhotos) {
-  //     this.state.photos.map((photo, index) => {
-  //       // console.log(photo, index)
-  //       return (
-  //         <TouchableOpacity
-  //           key={index}
-  //         >
-  //           <Image
-  //             style={{
-  //               width: 100,
-  //               height: 100
-  //             }}
-  //             source={{ uri: photo.node.image.uri }}
-  //           />
-  //         </TouchableOpacity>
-  //       )
-  //     })
-  //   }
-  // }
 
   render() {
     // console.log(this.state)
