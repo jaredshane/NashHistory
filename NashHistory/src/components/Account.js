@@ -11,7 +11,8 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import { RNS3 } from 'react-native-aws3'
-const { options } =  require('../../awsoptions')
+
+const { options } = require('../../awsoptions')
 
 class Account extends Component {
   constructor(props) {
