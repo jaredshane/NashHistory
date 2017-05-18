@@ -97,7 +97,7 @@ class Account extends Component {
         password: this.state.password
       })
       .then((res) => {
-        console.log(res.data.user[0].id)
+        // console.log(res.data.user[0].id)
         this.setState({
           id: res.data.user[0].id,
           page: 'journal',
@@ -106,7 +106,7 @@ class Account extends Component {
         })
       })
       .then(() => {
-        console.log('register', this.state.id)
+        // console.log('register', this.state.id)
         this.props.loggedIn(this.state.email, this.state.id)
       })
     } else {
