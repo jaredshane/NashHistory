@@ -164,11 +164,15 @@ class Account extends Component {
         photo_url: res,
         user_id: this.state.id
       }
-        axios.post('https://lit-eyrie-84713.herokuapp.com/v1/journal', data)
-        .then((response) => {
-          // console.log('response', response)
-          this.setState({ modalVisible: false })
-        })
+      const entryArr = this.state.userEntries
+      console.log('data', data, entryArr)
+      entryArr.push(data)
+      this.setState({ userEntries: entryArr })
+      axios.post('https://lit-eyrie-84713.herokuapp.com/v1/journal', data)
+      .then((response) => {
+        // console.log('response', response)
+        this.setState({ modalVisible: false })
+      })
     })
   }
 
