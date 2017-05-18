@@ -155,7 +155,7 @@ class Account extends Component {
     RNS3.put(file, options).then(response => {
       // console.log(response)
       if (response.status !== 201) console.log('Failed to upload image to S3')
-      console.log('aws', response.body.postResponse.location)
+      // console.log('aws', response.body.postResponse.location)
       return response.body.postResponse.location
     })
     .then((res) => {
