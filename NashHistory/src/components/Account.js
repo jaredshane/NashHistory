@@ -166,8 +166,24 @@ class Account extends Component {
       }
         axios.post('https://lit-eyrie-84713.herokuapp.com/v1/journal', data)
         .then((response) => {
-          console.log('response', response)
+          // console.log('response', response)
+          this.setState({ modalVisible: false })
         })
+    })
+  }
+
+  renderEntries() {
+    console.log(this.state.userEntries)
+    console.log('this was called')
+    return this.state.userEntries.map(entry => {
+      return (
+        <CardSection key={entry.id}>
+          <Card>
+            <Text>{entry.entry}</Text>
+            <Image source={{ uri: entry.photo_url }} style={{ height: 100, width: 100 }} />
+          </Card>
+        </CardSection>
+      )
     })
   }
 
