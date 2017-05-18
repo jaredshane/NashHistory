@@ -25,13 +25,14 @@ class Account extends Component {
       page: '',
       passwordConfirmation: '',
       error: '',
-      id: '',
+      id: null,
       modalVisible: false,
       photoModal: false,
       photos: [],
       selectedImage: '',
       selectedImageName: '',
-      entry: ''
+      entry: '',
+      userEntries: []
     }
     this.loginButtonPress = this.loginButtonPress.bind(this)
     this.registerButtonPress = this.registerButtonPress.bind(this)
