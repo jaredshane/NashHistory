@@ -59,5 +59,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Need access to camera for a journal feature</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need access to photos for a journal feature</string>
 </dict>
 </plist>

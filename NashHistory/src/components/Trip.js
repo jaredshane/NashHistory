@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableHighlight, Linking } from 'react-native'
+import { Text, TouchableHighlight, Linking, ScrollView } from 'react-native'
 import axios from 'axios'
+import Card from './Card'
+import CardSection from './CardSection'
 
 class Trip extends Component {
 
@@ -34,8 +36,8 @@ componentWillMount() {
     .then((res) => {
       // console.log('trip res', res.data)
       res.data.map((trip) => {
-        console.log('trip', trip)
-        console.log(this.state.trip)
+        // console.log('trip', trip)
+        // console.log(this.state.trip)
         const tripArr = this.state.trip
         tripArr.push(trip)
         return this.setState({ trip: tripArr })
@@ -54,7 +56,7 @@ navigatePlace(la, lo) {
 saveTrips() {
   // console.log(this.state.trip)
   Promise.all(this.state.trip.map(trip => {
-    console.log(trip)
+    // console.log(trip)
     const data = {
       latitude: trip.latitude,
       longitude: trip.longitude,
@@ -65,7 +67,7 @@ saveTrips() {
       user_id: this.props.id }
     return axios.post('https://lit-eyrie-84713.herokuapp.com/v1/trip', data)
     .then((res) => {
-      console.log(res)
+      // console.log(res)
     })
   }))
 }
@@ -75,8 +77,9 @@ showSave() {
     return (
       <TouchableHighlight
         onPress={this.saveTrips}
+        style={styles.saveButton}
       >
-        <Text>
+        <Text style={styles.textStyle}>
           Save Your Trip!
         </Text>
       </TouchableHighlight>
@@ -86,28 +89,56 @@ showSave() {
 
 renderTrips() {
   return this.props.tripList.map(trip => {
-    console.log('trip', trip)
+    // console.log('trip', trip)
     return (
-      <View key={trip.number}>
-        <Text>{trip.title} {trip.location}</Text>
-        <TouchableHighlight
-          onPress={this.navigatePlace.bind(this, trip.latitude, trip.longitude)}
-        >
-          <Text>Navigate</Text>
-        </TouchableHighlight>
-      </View>
+      <CardSection key={trip.number}>
+        <Card>
+          <Text style={styles.title}>{trip.title}</Text>
+          <Text style={styles.location}>{trip.location}</Text>
+          <TouchableHighlight
+            style={styles.buttonStyle}
+            onPress={this.navigatePlace.bind(this, trip.latitude, trip.longitude)}
+          >
+              <Text style={styles.textStyle}>Navigate</Text>
+            </TouchableHighlight>
+
+        </Card>
+      </CardSection>
     )
   })
 }
 
   render() {
     return (
-      <View>
+      <ScrollView style={{ marginBottom: 49 }}>
         {this.renderTrips()}
         {this.showSave()}
-      </View>
+      </ScrollView>
     )
   }
 }
 
+const styles = {
+  location: {
+    padding: 10
+  },
+  buttonStyle: {
+    // borderColor: '007aff',
+    // borderWidth: 2,
+    alignSelf: 'stretch',
+    backgroundColor: '#007aff',
+    padding: 10
+  },
+  textStyle: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  saveButton: {
+    alignSelf: 'stretch',
+    backgroundColor: 'green',
+    padding: 20,
+    margin: 7
+  }
+
+}
 export default Trip
