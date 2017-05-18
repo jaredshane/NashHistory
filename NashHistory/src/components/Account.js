@@ -249,32 +249,33 @@ class Account extends Component {
             animationType='fade'
             visible={this.state.photoModal}
           >
-            <View>
+            <ScrollView>
               <Text>Photosssss</Text>
-              {
-                this.state.photos.map((photo, index) => {
+              {this.state.photos.map((photo, index) => {
                   // console.log(photo, index)
                   return (
                     <TouchableOpacity
                       key={index}
-                      onPress={() => {
-                        this.setImageToState(photo)
-                      }}
+                      onPress={() => { this.setImageToState(photo) }}
                     >
                       <Image
                         style={{
-                          width: 100,
-                          height: 100
+                          width: 150,
+                          height: 150
                         }}
                         source={{ uri: photo.node.image.uri }}
                       />
                     </TouchableOpacity>
-
                   )
-                })
-              }
-
-            </View>
+                })}
+                <TouchableOpacity
+                  onPress={this.togglePhotoModal}
+                >
+                  <Text>
+                    Close
+                  </Text>
+                </TouchableOpacity>
+            </ScrollView>
           </Modal>
 
       {/***** Will display journal entries and buttons to create new entry and logout ******/}
