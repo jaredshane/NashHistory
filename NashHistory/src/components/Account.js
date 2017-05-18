@@ -108,7 +108,7 @@ class Account extends Component {
   }
 
   togglePhotoModal() {
-    this.setState({ photoModal: !this.state.photoModal })
+    this.setState({ photoModal: !this.state.photoModal, modalVisible: !this.state.modalVisible })
   }
 
   pickImage() {
