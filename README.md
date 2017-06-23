@@ -20,6 +20,9 @@ A simple mobile application that lets a user see all of the historical markers i
 ## NashHistory
 ![Map View](/NashHistory/src/images/nashhistory/mapview.png)
 ![Trip View](/NashHistory/src/images/nashhistory/tripview.png)
+![Entry View](/NashHistory/src/images/nashhistory/entryview.png)
+![Journal View](/NashHistory/src/images/nashhistory/journal.png)
+
 
 ## Credits
 
